@@ -14,12 +14,12 @@ git@github.com:sandeep-krp/cs-talks.git
 
 Go inside cs-talks-web module in the repo:
 ```
-cd cs-talks/cs-talks-web
+cd cs-talks/cs-talks/cs-talks-web
 ```
 
 Run the server
 ```
-Run mvn spring-boot:run
+mvn spring-boot:run
 ```
 
 The application can now be opened on the browser at http://localhost:8080
