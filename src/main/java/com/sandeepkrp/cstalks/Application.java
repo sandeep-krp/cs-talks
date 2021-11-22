@@ -1,4 +1,4 @@
-package com.example.springboot;
+package com.sandeepkrp.cstalks;
 
 import java.util.Arrays;
 
