@@ -4,6 +4,8 @@ import com.sandeepkrp.cstalks.core.talks.models.TalkModel;
 import com.sandeepkrp.cstalks.core.talks.models.TalksFilter;
 import com.sandeepkrp.cstalks.core.talks.models.TalksModel;
 import com.sandeepkrp.cstalks.core.talks.api.TalksService;
+import com.sandeepkrp.cstalks.web.models.OperationResponseMessage;
+import com.sandeepkrp.cstalks.web.models.ResouceCreatedResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +18,8 @@ public class TalksController {
 
     @Operation(summary = "Adds a new Talk in the system")
     @PostMapping("/talks")
-    public void addTalk(@RequestBody TalkModel talkModel) {
-        this.talksService.addTalk(talkModel);
+    public ResouceCreatedResponse addTalk(@RequestBody TalkModel talkModel) {
+        return new ResouceCreatedResponse(this.talksService.addTalk(talkModel));
     }
 
     @Operation(summary = "Gets the talks based on its attributes")
@@ -30,8 +32,8 @@ public class TalksController {
 
     @Operation(summary = "Adds an attendee to a talk")
     @PutMapping("/talks/{talkId}/attendees/{attendeeId}")
-    public void addAttendeeToTalk(@PathVariable String talkId, @PathVariable String attendeeId) {
+    public OperationResponseMessage addAttendeeToTalk(@PathVariable String talkId, @PathVariable String attendeeId) {
         this.talksService.addAttendee(talkId,attendeeId);
-
+        return new OperationResponseMessage("Attendee added successfully");
     }
 }

@@ -25,7 +25,7 @@ public class MemoryBasedTalkService implements TalksService {
 
 
     @Override
-    public void addTalk(TalkModel talkModel) {
+    public String addTalk(TalkModel talkModel) {
         if (talkModel.getId() == null) {
             talkModel.setId("tl-" + UUID.randomUUID());
         }
@@ -35,6 +35,7 @@ public class MemoryBasedTalkService implements TalksService {
             talkModel.setAttendees(new ArrayList<>());
         }
         this.talks.put(talkModel.getId(), talkModel);
+        return talkModel.getId();
     }
 
     @Override
@@ -71,7 +72,7 @@ public class MemoryBasedTalkService implements TalksService {
     }
 
     @Override
-    public void addAttendee(String talkId, String attendeeId) {
+    public Boolean addAttendee(String talkId, String attendeeId) {
         if (!this.talks.containsKey(talkId)) {
             throw new ResourceNotFound();
         }
@@ -79,5 +80,6 @@ public class MemoryBasedTalkService implements TalksService {
         // A check could be added to see if the attendee is already present
         this.talks.get(talkId).getAttendees().
                 add(this.attendeeService.getAttendeeById(attendeeId));
+        return Boolean.TRUE;
     }
 }

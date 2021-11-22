@@ -17,11 +17,12 @@ public class MemoryBaseAttendeeService implements AttendeeService {
     private Map<String, Attendee> attendees = new ConcurrentHashMap<>();
 
     @Override
-    public void addAttendee(Attendee attendee) {
+    public String addAttendee(Attendee attendee) {
         if(attendee.getId() == null){
             attendee.setId("at-"+ UUID.randomUUID().toString());
         }
         this.attendees.put(attendee.getId(),attendee);
+        return attendee.getId();
     }
 
     @Override
